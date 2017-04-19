@@ -13,7 +13,7 @@
 ## 谢谢参与
 
 
-[本 slide 及所有相关源码](http://git.mailtech.cn/william/lerning-async)
+[本 slide 及所有相关源码](http://git.mailtech.cn/william/learning-async)
 
 
 <!-- .element: style="font-size: 60%; margin-top: 12em" -->
