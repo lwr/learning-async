@@ -1,5 +1,5 @@
 /////
-package com.github.lwr.lerningasync.coroutine
+package com.github.lwr.learningasync.coroutine
 
 import kotlinx.coroutines.experimental.*
 

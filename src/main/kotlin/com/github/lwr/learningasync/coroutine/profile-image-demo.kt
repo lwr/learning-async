@@ -1,4 +1,4 @@
-package com.github.lwr.lerningasync.coroutine
+package com.github.lwr.learningasync.coroutine
 
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch

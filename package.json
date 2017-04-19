@@ -1,8 +1,8 @@
 {
-    "name"            : "lerning-async",
+    "name"            : "learning-async",
     "version"         : "0.0.1",
     "description"     : "Learing Async Programing",
-    "repository"      : "lwr/lerning-async",
+    "repository"      : "lwr/learning-async",
     "private"         : true,
 
     "scripts"         : {
