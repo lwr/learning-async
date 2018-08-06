@@ -1,7 +1,7 @@
 /////
 package com.github.lwr.learningasync.coroutine
 
-import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.*
 
 
 fun main(args: Array<String>) = runBlocking<Unit> {
