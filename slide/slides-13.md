@@ -4,11 +4,9 @@
 
 ## Kotlin 的 coroutine
 
-@since 1.1
+@since 1.1 (experimental)
 
-experimental
-
-已完整实现, API 可能还会有调整
+now 1.3 coroutine is graduated and stable
 
 ---
 
@@ -82,36 +80,36 @@ suspend fun loadAvatarImage(id: Int): String {
 
 ```kotlin
 // 串行版本遍历
-fun main(args: Array<String>) = runBlocking {
-    val start = System.currentTimeMillis()
-    for (id in 1..2) {
-        try {
-            println("got avatar image data: ${loadAvatarImage(id)}")
-        } catch (e: Exception) {
-            println("something wrong: $e")
-        }
-    }
-    println("done sequentially in time: ${System.currentTimeMillis() - start}")
-}    
-```
-
-
-```kotlin
-// 并行版本遍历
-fun main(args: Array<String>) = runBlocking {
-    val start = System.currentTimeMillis()
-    val jobs = (1..2).map { id ->
-        launch(context) { // 这里可以尝试各种 context (对应不同的线程组)
-                          // 会发现, 即使从头到尾都是单一线程, 执行结果都是 2 秒附近, 并行 
+fun main() = runBlocking {
+    println("done sequentially in time: ${measureTimeMillis {
+        (1..2).forEach { id ->
             try {
                 println("got avatar image data: ${loadAvatarImage(id)}")
             } catch (e: Exception) {
                 println("something wrong: $e")
             }
         }
-    }
-    jobs.forEach { it.join() }
-    println("done parallelly in time: ${System.currentTimeMillis() - start}")
+    }}")
+}    
+```
+
+
+```kotlin
+// 并行版本遍历
+fun main() = runBlocking {
+    println("done parallelly in time: ${measureTimeMillis {
+        (1..2).map { id ->
+            // 这里可以尝试各种 context (对应不同的线程组)
+            // 会发现, 即使从头到尾都是单一线程, 执行结果都是 2 秒附近, 并行
+            launch(coroutineContext) {
+                try {
+                    println("got avatar image data: ${loadAvatarImage(id)}")
+                } catch (e: Exception) {
+                    println("something wrong: $e")
+                }
+            }
+        }.joinAll()
+    }}")
 }    
 ```
 <!-- .element: class="fragment" data-fragment-index="2" -->

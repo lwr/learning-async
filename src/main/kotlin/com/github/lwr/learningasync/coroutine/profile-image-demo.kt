@@ -1,9 +1,10 @@
 package com.github.lwr.learningasync.coroutine
 
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlin.coroutines.coroutineContext
+import kotlin.system.measureTimeMillis
 
 suspend fun loadProfile(id: Int): Map<String, Any> {
     delay(1000L)
@@ -27,23 +28,20 @@ suspend fun loadAvatarImage(id: Int): String {
 }
 
 
-fun main(args: Array<String>) = runBlocking {
-    run {
-        val start = System.currentTimeMillis()
-        for (id in 1..2) {
+fun main() = runBlocking {
+    println("done sequentially in time: ${measureTimeMillis {
+        (1..2).forEach { id ->
             try {
                 println("got avatar image data: ${loadAvatarImage(id)}")
             } catch (e: Exception) {
                 println("something wrong: $e")
             }
         }
-        println("done sequentially in time: ${System.currentTimeMillis() - start}")
-    }
+    }}")
 
-    run {
-        println()
-        val start = System.currentTimeMillis()
-        val jobs = (1..2).map { id ->
+    println()
+    println("done parallelly in time: ${measureTimeMillis {
+        (1..2).map { id ->
             launch(coroutineContext) {
                 try {
                     println("got avatar image data: ${loadAvatarImage(id)}")
@@ -51,8 +49,6 @@ fun main(args: Array<String>) = runBlocking {
                     println("something wrong: $e")
                 }
             }
-        }
-        jobs.forEach { it.join() }
-        println("done parallelly in time: ${System.currentTimeMillis() - start}")
-    }
+        }.joinAll()
+    }}")
 }

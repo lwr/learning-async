@@ -27,8 +27,10 @@ npm run slide
 
 1. 可直接执行 js 代码, 比如
 
-    ```text
+    ```bash
     node js/step-by-step/4-cps-transformed.js
+    ```
+    ```
     got avatar image data: [massive of data url1 ...]
     something wrong: Error: url can not be load: url2
     done sequentially in time: 4035
@@ -38,5 +40,31 @@ npm run slide
     done parallelly in time: 2010 
     ```
 
-2. kotlin 代码<br>
-   可使用 maven 编译, 但运行相对麻烦, 建议直接在 IDEA 内执行
+2. kotlin 代码
+
+    ```bash
+    mvn clean compile
+    ```
+    ```bash
+    mvn exec:java -D"exec.mainClass"="com.github.lwr.learningasync.coroutine.Profile_image_demoKt"
+    ```
+    ```
+    [INFO] Scanning for projects...
+    ... ...
+    [INFO] --- exec-maven-plugin:1.6.0:java (default-cli) @ learning-async ---
+    got avatar image data: [massive of data url1 ...]
+    something wrong: java.lang.Exception: url can not be load: url2
+    done sequentially in time: 4023
+    
+    got avatar image data: [massive of data url1 ...]
+    something wrong: java.lang.Exception: url can not be load: url2
+    done parallelly in time: 2029
+    [INFO] ------------------------------------------------------------------------
+    [INFO] BUILD SUCCESS
+    [INFO] ------------------------------------------------------------------------
+    [INFO] Total time: 7.268 s
+    [INFO] Finished at: 2018-10-30T09:41:09+08:00
+    [INFO] Final Memory: 12M/309M
+    [INFO] ------------------------------------------------------------------------    
+    ```
+    

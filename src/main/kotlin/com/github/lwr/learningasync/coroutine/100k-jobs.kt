@@ -1,16 +1,18 @@
 /////
 package com.github.lwr.learningasync.coroutine
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
-
-fun main(args: Array<String>) = runBlocking<Unit> {
+fun main() = runBlocking<Unit> {
     val jobs = List(100_000) {
         // create a lot of coroutines and list their jobs
-        launch(CommonPool) {
+        async {
             delay(1000L)
             print(".")
         }
     }
-    jobs.forEach { it.join() } // wait for all jobs to complete
+    jobs.awaitAll() // wait for all jobs to complete
 }
