@@ -19,9 +19,6 @@ npm run slide
 
 > <http://127.0.0.1:8001/slide/>
 
-如果使用 safari 或 firefox 浏览器，也可直接打开本地文件 `slide/index.html` 浏览,
-但 chrome 因为不支持 file 协议的 xhr 从而不能直接支持
-
 
 ### 编译 / 执行示例代码
 
@@ -34,11 +31,15 @@ npm run slide
     got avatar image data: [massive of data url1 ...]
     something wrong: Error: url can not be load: url2
     done sequentially in time: 4035
-    
+
     got avatar image data: [massive of data url1 ...]
     something wrong: Error: url can not be load: url2
-    done parallelly in time: 2010 
+    done parallelly in time: 2010
     ```
+
+    **Note**
+    - [node-fibers](https://github.com/laverdet/node-fibers) 已是淘汰项目, 并且无法支持 node 16+,
+      相关例子代码无法运行, 详情请参考官网说明
 
 2. kotlin 代码
 
@@ -55,7 +56,7 @@ npm run slide
     got avatar image data: [massive of data url1 ...]
     something wrong: java.lang.Exception: url can not be load: url2
     done sequentially in time: 4023
-    
+
     got avatar image data: [massive of data url1 ...]
     something wrong: java.lang.Exception: url can not be load: url2
     done parallelly in time: 2029
@@ -65,6 +66,6 @@ npm run slide
     [INFO] Total time: 7.268 s
     [INFO] Finished at: 2018-10-30T09:41:09+08:00
     [INFO] Final Memory: 12M/309M
-    [INFO] ------------------------------------------------------------------------    
+    [INFO] ------------------------------------------------------------------------
     ```
-    
+

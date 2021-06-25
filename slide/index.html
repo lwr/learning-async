@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="../node_modules/reveal.js/css/reveal.css">
-        <link rel="stylesheet" href="../node_modules/reveal.js/css/theme/white.css">
+        <title></title>
+        <link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css">
+        <link rel="stylesheet" href="../node_modules/reveal.js/dist/theme/white.css">
+        <!-- Theme used for syntax highlighting of code -->
         <link rel="stylesheet" href="../node_modules/highlight.js/styles/github-gist.css">
         <link rel="stylesheet" href="css/slide.css">
     </head>
@@ -11,42 +13,31 @@
         <article class="reveal">
             <main class="slides"></main>
         </article>
-        <script src="../node_modules/reveal.js/lib/js/head.min.js"></script>
-        <script src="../node_modules/reveal.js/js/reveal.js"></script>
-        <!-- Theme used for syntax highlighting of code -->
-        <script>
-            (function (mainDiv) {
-                // noinspection ES6ConvertVarToLetConst
-                for (var i = 1; i <= 15; i++) {
-                    mainDiv.insertAdjacentHTML('beforeEnd'.toLowerCase(),
-                        ''
-                        + '<section data-markdown="slides-' + i + '.md?' + new Date().getTime() + '" data-charset="utf-8"'
-                        + '         data-separator         ="<hr section-separator>"'
-                        + '         data-separator-vertical="^\r?\n---\r?\n$"'
-                        + '></section>');
-                }
+        <script type="module">
+            import Reveal from "../node_modules/reveal.js/dist/reveal.esm.js";
 
-                // noinspection JSUnusedGlobalSymbols
+            (async () => {
+                document.getElementsByClassName('slides')[0].innerHTML = Array(15).fill(0).map((zero, i) => `
+                    <section data-markdown="slides-${i + 1}.md?${+new Date}"
+                             data-charset="utf-8"
+                             data-separator="<hr section-separator>"
+                             data-separator-vertical="^\\r?\\n---\\r?\\n$"
+                    ></section>`).join('');
+
                 Reveal.initialize({
 
                     slideNumber : true,
                     history     : true,
 
-                    // More info https://github.com/hakimel/reveal.js#dependencies
-                    dependencies : [
-                        {src : '../node_modules/reveal.js/plugin/markdown/marked.js'},
-                        {src : '../node_modules/reveal.js/plugin/markdown/markdown.js'},
-                        {src : '../node_modules/reveal.js/lib/js/classList.js'},
-                        {src : '../node_modules/reveal.js/plugin/zoom-js/zoom.js', async : true},
-                        {src : '../node_modules/reveal.js/plugin/notes/notes.js', async : true},
-                        {
-                            src      : '../node_modules/reveal.js/plugin/highlight/highlight.js',
-                            async    : true,
-                            callback : function () { hljs.initHighlightingOnLoad(); }
-                        },
-                    ]
+                    // More info https://revealjs.com/plugins/
+                    plugins : [
+                        (await import("../node_modules/reveal.js/plugin/markdown/markdown.esm.js")).default,
+                        (await import("../node_modules/reveal.js/plugin/zoom/zoom.esm.js")).default,
+                        (await import("../node_modules/reveal.js/plugin/notes/notes.esm.js")).default,
+                        (await import("../node_modules/reveal.js/plugin/highlight/highlight.esm.js")).default,
+                    ],
                 });
-            })(document.getElementsByClassName('slides')[0]);
+            })();
         </script>
     </body>
 </html>

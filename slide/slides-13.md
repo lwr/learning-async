@@ -6,12 +6,12 @@
 
 @since 1.1 (experimental)
 
-now 1.3 coroutine is graduated and stable
+coroutine is graduated and stable after 1.3
 
 ---
 
 ### Suspending functions
- 
+
 
 新关键字: suspend (异步函数声明)
 <!-- .element: style="font-size: 60%" -->
@@ -24,21 +24,21 @@ now 1.3 coroutine is graduated and stable
 这个传染性规则和 CPS 完全一致<br>
 这也充分展示了 kotlin DSL 的强大能力
 <!-- .element: class="fragment" data-fragment-index="2" -->
-<!-- .element: style="font-size: 50%; text-align: left; margin-left: 11em" --> 
+<!-- .element: style="font-size: 50%; text-align: left; margin-left: 11em" -->
 
 ---
 
- 
+
 
 - Kotlin 的 suspend 关键字和 ES7 的 async 作用类似<br>
 但 ES7 没有传染性约定, 因为一定会返回 Promise<br>
 <br>
-- 虽然如此, 但假如一个 ES7 非 async 方法调用了 async 方法, 并且希望使用 
-await, 那么就必须也声明为 async 从而也产生了传染性, 这是间接的传染性<br> 
+- 虽然如此, 但假如一个 ES7 非 async 方法调用了 async 方法, 并且希望使用
+await, 那么就必须也声明为 async 从而也产生了传染性, 这是间接的传染性<br>
 <br>
 - ES7 不会阻止程序直接拿 async function 的返回值当 Promise 使用<br>
 
-<!-- .element: style="width: 50%; margin:auto; font-size: 50%; text-align: left;" --> 
+<!-- .element: style="width: 50%; margin:auto; font-size: 50%; text-align: left;" -->
 
 
 ---
@@ -90,7 +90,7 @@ fun main() = runBlocking {
             }
         }
     }}")
-}    
+}
 ```
 
 
@@ -110,7 +110,7 @@ fun main() = runBlocking {
             }
         }.joinAll()
     }}")
-}    
+}
 ```
 <!-- .element: class="fragment" data-fragment-index="2" -->
 
